@@ -44,9 +44,16 @@ public class JpaMain {
 //            em.close(); //영속성 컨텍스트 종료
 //            member.setName("ZZZZZ");
 
-            Member member = new Member(200L, "member200");
+//            Member member = new Member(200L, "member200");
+//            em.persist(member);
+//            em.flush();
+
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.USER);
+
             em.persist(member);
-            em.flush();
 
             tx.commit();
         } catch (Exception e) {
