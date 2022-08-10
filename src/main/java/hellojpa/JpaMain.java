@@ -38,8 +38,15 @@ public class JpaMain {
 //            em.persist(member2);
 //            System.out.println("=================");
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ");
+//            Member member = em.find(Member.class, 150L);
+//            em.detach(member); //준영속상태(엔티티 단위)
+//            em.clear(); //영속성 컨텍스트 초기화
+//            em.close(); //영속성 컨텍스트 종료
+//            member.setName("ZZZZZ");
+
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+            em.flush();
 
             tx.commit();
         } catch (Exception e) {
