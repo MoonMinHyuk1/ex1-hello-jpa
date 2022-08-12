@@ -55,6 +55,8 @@ public class JpaMain {
 
             em.persist(member);
 
+            //test
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
