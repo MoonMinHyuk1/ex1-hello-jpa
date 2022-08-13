@@ -49,13 +49,10 @@ public class JpaMain {
 //            em.flush();
 
             Member member = new Member();
-            member.setId(1L);
             member.setUsername("A");
-            member.setRoleType(RoleType.USER);
+//            member.setRoleType(RoleType.USER);
 
             em.persist(member);
-
-            //test
 
             tx.commit();
         } catch (Exception e) {
