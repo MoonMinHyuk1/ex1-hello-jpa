@@ -54,6 +54,7 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this); //객체지향스럽게
     }
 
 //엔티티 매핑
