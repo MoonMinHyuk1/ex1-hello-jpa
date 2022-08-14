@@ -14,18 +14,18 @@ public class JpaMain {
 
         tx.begin();
         try {
-            //다양한 연관관계 매핑
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-
-            em.persist(team);
-
-            tx.commit();
+//            //다양한 연관관계 매핑
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            em.persist(member);
+//
+//            Team team = new Team();
+//            team.setName("teamA");
+//            team.getMembers().add(member);
+//
+//            em.persist(team);
+//
+//            tx.commit();
 
 //            //연관관계 매핑 기초
 //            Team team = new Team();
