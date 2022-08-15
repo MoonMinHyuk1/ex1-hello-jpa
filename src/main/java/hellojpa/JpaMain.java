@@ -1,9 +1,8 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -14,20 +13,43 @@ public class JpaMain {
 
         tx.begin();
         try {
-            //고급 매핑
-            Movie movie = new Movie();
-            movie.setDirector("aaa");
-            movie.setActor("bbb");
-            movie.setName("바람과함께사라지다");
-            movie.setPrice(10000);
+            //프록시와 연관관계 관리
+            Member member = new Member();
+            member.setUsername("hello");
 
-            em.persist(movie);
+            em.persist(member);
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
+//            Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.getReference(Member.class, member.getId());
+
+//            em.detach(findMember);
+
+//            System.out.println("member.id = " + findMember.getId());
+//            System.out.println("member.name = " + findMember.getUsername());
+
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember));
+            System.out.println("getClass = " + findMember.getClass());
+            Hibernate.initialize(findMember); //강제초기화
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember));
 
             tx.commit();
+
+//            //고급 매핑
+//            Movie movie = new Movie();
+//            movie.setDirector("aaa");
+//            movie.setActor("bbb");
+//            movie.setName("바람과함께사라지다");
+//            movie.setPrice(10000);
+//
+//            em.persist(movie);
+//            em.flush();
+//            em.clear();
+//
+//            Movie findMovie = em.find(Movie.class, movie.getId());
+//
+//            tx.commit();
 
 //            //다양한 연관관계 매핑
 //            Member member = new Member();
@@ -108,6 +130,7 @@ public class JpaMain {
 //            tx.commit();
         } catch (Exception e) {
             tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }
