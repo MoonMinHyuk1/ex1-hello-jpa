@@ -13,7 +13,7 @@ import java.util.List;
 //        initialValue = 1, allocationSize = 50
 //)
 @Entity
-public class Member {
+public class Member extends BaseEntity {
     //다양한 연관관계 매핑
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")

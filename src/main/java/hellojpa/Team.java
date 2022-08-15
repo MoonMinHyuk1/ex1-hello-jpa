@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+public class Team extends BaseEntity {
     //다양한 연관관계 매핑
     @Id @GeneratedValue
     @Column(name = "TEAM_ID")
