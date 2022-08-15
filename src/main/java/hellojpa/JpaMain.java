@@ -14,34 +14,35 @@ public class JpaMain {
         tx.begin();
         try {
             //프록시와 연관관계 관리
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
-
-            Team team2 = new Team();
-            team2.setName("teamB");
-            em.persist(team2);
-
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setTeam(team);
-            em.persist(member);
-
-            Member member2 = new Member();
-            member2.setUsername("hello");
-            member2.setTeam(team2);
-            em.persist(member2);
-
-            em.flush();
-            em.clear();
-
-//            Member m = em.find(Member.class, member.getId());
-
-            List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
-
-            for (Member findMember : members) {
-                System.out.println("team.name = " + findMember.getTeam().getName());
-            }
+            //지연로딩
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
+//
+//            Team team2 = new Team();
+//            team2.setName("teamB");
+//            em.persist(team2);
+//
+//            Member member = new Member();
+//            member.setUsername("hello");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            Member member2 = new Member();
+//            member2.setUsername("hello");
+//            member2.setTeam(team2);
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+//
+////            Member m = em.find(Member.class, member.getId());
+//
+//            List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
+//
+//            for (Member findMember : members) {
+//                System.out.println("team.name = " + findMember.getTeam().getName());
+//            }
 
 //            Member findMember = em.find(Member.class, member.getId());
 //            Member findMember = em.getReference(Member.class, member.getId());
@@ -57,6 +58,23 @@ public class JpaMain {
 //            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember));
 
 //            System.out.println(findMember.getTeam().getName());
+
+            //Cascade
+            Parent parent = new Parent();
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+//            em.persist(child1);
+//            em.persist(child2);
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildren().remove(0);
 
             tx.commit();
 
