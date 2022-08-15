@@ -14,6 +14,21 @@ public class JpaMain {
 
         tx.begin();
         try {
+            //고급 매핑
+            Movie movie = new Movie();
+            movie.setDirector("aaa");
+            movie.setActor("bbb");
+            movie.setName("바람과함께사라지다");
+            movie.setPrice(10000);
+
+            em.persist(movie);
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+
+            tx.commit();
+
 //            //다양한 연관관계 매핑
 //            Member member = new Member();
 //            member.setUsername("member1");
