@@ -13,6 +13,24 @@ public class JpaMain {
 
         tx.begin();
         try {
+            //값 타입
+            Address address = new Address("city", "street", "10000");
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(address);
+            em.persist(member);
+
+            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setHomeAddress(copyAddress);
+            em.persist(member2);
+
+            member.getHomeAddress().setCity("newCity");
+
+            tx.commit();
             //프록시와 연관관계 관리
             //지연로딩
 //            Team team = new Team();
@@ -59,24 +77,24 @@ public class JpaMain {
 
 //            System.out.println(findMember.getTeam().getName());
 
-            //Cascade
-            Parent parent = new Parent();
-            Child child1 = new Child();
-            Child child2 = new Child();
-
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            em.persist(parent);
-//            em.persist(child1);
-//            em.persist(child2);
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildren().remove(0);
-
-            tx.commit();
+//            //Cascade
+//            Parent parent = new Parent();
+//            Child child1 = new Child();
+//            Child child2 = new Child();
+//
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+////            em.persist(child1);
+////            em.persist(child2);
+//            em.flush();
+//            em.clear();
+//
+//            Parent findParent = em.find(Parent.class, parent.getId());
+//            findParent.getChildren().remove(0);
+//
+//            tx.commit();
 
 //            //고급 매핑
 //            Movie movie = new Movie();
