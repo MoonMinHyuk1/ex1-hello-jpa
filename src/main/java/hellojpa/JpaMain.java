@@ -14,6 +14,18 @@ public class JpaMain {
 
         tx.begin();
         try {
+            //객체지향 쿼리언어1
+            List<Member> result = em.createQuery(
+                    "select m from Member m where m.username like '%kim%'",
+                    Member.class
+            ).getResultList();
+
+            for(Member member : result) {
+                System.out.println("member = " + member);
+            }
+
+            tx.commit();
+
             //값 타입
 //            Address address = new Address("city", "street", "10000");
 //
@@ -31,41 +43,41 @@ public class JpaMain {
 //
 //            member.getHomeAddress().setCity("newCity");
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeAddress(new Address("homeCity", "street", "10000"));
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
-            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
-            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
-
-            em.persist(member);
-            em.flush();
-            em.clear();
-
-            System.out.println("============ START ============");
-            Member findMember = em.find(Member.class, member.getId());
-
-            List<AddressEntity> addressHistory = findMember.getAddressHistory();
-            for(AddressEntity address : addressHistory) {
-                System.out.println("address = " + address.getAddress().getCity());
-            }
-            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-            for(String favoriteFood : favoriteFoods) {
-                System.out.println("favoriteFood = " + favoriteFood);
-            }
-
-            Address a = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("newCity", a.getStreet(), a.getZipcode()));
-
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("한식");
-
-            findMember.getAddressHistory().remove(new AddressEntity("old1", "street", "10000"));
-            findMember.getAddressHistory().add(new AddressEntity("new1", "street", "10000"));
-
-            tx.commit();
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(new Address("homeCity", "street", "10000"));
+//            member.getFavoriteFoods().add("치킨");
+//            member.getFavoriteFoods().add("족발");
+//            member.getFavoriteFoods().add("피자");
+//            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
+//            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
+//
+//            em.persist(member);
+//            em.flush();
+//            em.clear();
+//
+//            System.out.println("============ START ============");
+//            Member findMember = em.find(Member.class, member.getId());
+//
+//            List<AddressEntity> addressHistory = findMember.getAddressHistory();
+//            for(AddressEntity address : addressHistory) {
+//                System.out.println("address = " + address.getAddress().getCity());
+//            }
+//            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+//            for(String favoriteFood : favoriteFoods) {
+//                System.out.println("favoriteFood = " + favoriteFood);
+//            }
+//
+//            Address a = findMember.getHomeAddress();
+//            findMember.setHomeAddress(new Address("newCity", a.getStreet(), a.getZipcode()));
+//
+//            findMember.getFavoriteFoods().remove("치킨");
+//            findMember.getFavoriteFoods().add("한식");
+//
+//            findMember.getAddressHistory().remove(new AddressEntity("old1", "street", "10000"));
+//            findMember.getAddressHistory().add(new AddressEntity("new1", "street", "10000"));
+//
+//            tx.commit();
 
             //프록시와 연관관계 관리
             //지연로딩
