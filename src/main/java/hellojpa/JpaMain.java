@@ -3,6 +3,9 @@ package hellojpa;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Set;
 
@@ -15,14 +18,29 @@ public class JpaMain {
         tx.begin();
         try {
             //객체지향 쿼리언어1
-            List<Member> result = em.createQuery(
-                    "select m from Member m where m.username like '%kim%'",
-                    Member.class
-            ).getResultList();
+//            List<Member> result = em.createQuery(
+//                    "select m from Member m where m.username like '%kim%'",
+//                    Member.class
+//            ).getResultList();
+//
+//            for(Member member : result) {
+//                System.out.println("member = " + member);
+//            }
 
-            for(Member member : result) {
-                System.out.println("member = " + member);
-            }
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+//            Root<Member> m = query.from(Member.class);
+//            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("username"), "kim"));
+//            String username = "AAA";
+//
+//            if(username != null) {
+//                cq = cq.where(cb.equal(m.get("username"), username));
+//            }
+//            List<Member> resultList = em.createQuery(cq)
+//                    .getResultList();
+
+//            List result = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER", Member.class)
+//                    .getResultList();
 
             tx.commit();
 
