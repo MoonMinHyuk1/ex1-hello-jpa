@@ -38,7 +38,6 @@ public class JpaMain {
 //            }
 //            List<Member> resultList = em.createQuery(cq)
 //                    .getResultList();
-
 //            List result = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER", Member.class)
 //                    .getResultList();
 
