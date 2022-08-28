@@ -18,6 +18,7 @@ public class Member extends BaseEntity {
     private Long id;
     @Column(name = "USERNAME")
     private String username;
+    private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
@@ -65,6 +66,14 @@ public class Member extends BaseEntity {
                     column=@Column(name="WORK_ZIPCODE"))
     })
     private Address workAddress;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Long getId() {
         return id;
