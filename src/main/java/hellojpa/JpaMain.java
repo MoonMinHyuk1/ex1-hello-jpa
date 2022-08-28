@@ -18,7 +18,6 @@ public class JpaMain {
         tx.begin();
         try {
             //객체지향 쿼리언어1
-
 //            List<Member> result = em.createQuery(
 //                    "select m from Member m where m.username like '%kim%'",
 //                    Member.class
