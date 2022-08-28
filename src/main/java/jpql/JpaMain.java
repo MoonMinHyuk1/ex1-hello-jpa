@@ -30,6 +30,8 @@ public class JpaMain {
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
+            tx.commit();
+
 //            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
 //                    .setFirstResult(0)
 //                    .setMaxResults(10)
