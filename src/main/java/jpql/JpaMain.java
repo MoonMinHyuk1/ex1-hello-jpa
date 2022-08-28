@@ -22,7 +22,7 @@ public class JpaMain {
             Member singleResult = query1.getSingleResult(); //결과가 무조건 하나
 
             TypedQuery<String> query2 = em.createQuery("select m.username from Member m", String.class);
-            Query query3 = em.createQuery("select m.username, m.age from Member m");
+//            Query query3 = em.createQuery("select m.username, m.age from Member m");
             TypedQuery<Member> query4 = em.createQuery("select m from Member m where m.username = :username", Member.class)
                             .setParameter("username", "member1");
             Member singleResult1 = query4.getSingleResult();
