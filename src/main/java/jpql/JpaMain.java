@@ -20,14 +20,16 @@ public class JpaMain {
             member.setUsername("member1");
             member.setAge(10);
             member.changeTeam(team);
+            member.setType(MemberType.ADMIN);
 
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            String query = "select m from Member m inner join m.team t";
-            List<Member> result = em.createQuery(query, Member.class)
+            String query = "select m.username, 'HELLO', TRUE from Member m" +
+                            "where m.type = jpql.MemberType.ADMIN";
+            List<Object[]> result = em.createQuery(query)
                     .getResultList();
 
             tx.commit();
