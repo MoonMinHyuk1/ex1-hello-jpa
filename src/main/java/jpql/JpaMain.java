@@ -40,6 +40,7 @@ public class JpaMain {
 
 //            String query = "select m from Member m join fetch m.team";
             String query = "select distinct t from Team t join fetch t.members"; //jpql 의 distinct 는 같은 식별자를 가진 team 엔티티 제거
+//            String query1 = "select i from Item i where type(i) IN (Book, Movie)";
             em.createQuery(query);
 
             tx.commit();
