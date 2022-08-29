@@ -27,6 +27,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
+            String query3 = "select m.team from Member m"; //묵시적 내부 조인, 사용 권장X
+            String query4 = "select t from Member m join m.team t";
+            em.createQuery(query3);
+            em.createQuery(query4);
+
             String query =
                     "select " +
                             "case when m.age <= 10 then '학생요금' " +
