@@ -49,6 +49,9 @@ public class JpaMain {
 //                    .setParameter("username", "회원1")
 //                    .getResultList();
 
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+
             tx.commit();
 
 //            Team team = new Team();
