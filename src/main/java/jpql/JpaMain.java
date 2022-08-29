@@ -42,8 +42,12 @@ public class JpaMain {
 //            String query = "select distinct t from Team t join fetch t.members"; //jpql 의 distinct 는 같은 식별자를 가진 team 엔티티 제거
 //            String query = "select i from Item i where type(i) IN (Book, Movie)";
 //            String query = "select count(m) from Member m";
-            String query = "select m from Member m where m = :member";
-            em.createQuery(query).setParameter("member", member1).getResultList(); //member1.id 로 검색
+//            String query = "select m from Member m where m = :member";
+//            em.createQuery(query).setParameter("member", member1).getResultList(); //member1.id 로 검색
+
+//            List<Member> resultList = em.createQuery("Member.findByUsername", Member.class)
+//                    .setParameter("username", "회원1")
+//                    .getResultList();
 
             tx.commit();
 
